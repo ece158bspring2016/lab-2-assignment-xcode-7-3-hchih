@@ -9,12 +9,16 @@
 import UIKit
 
 class GamePickerViewController: UITableViewController {
-    var games = [
+    
+    
+    var games:[String] = [
         "Angry Birds",
-        "Tic tac toe",
-        "Black Jack",
-        "Humming Bird"
-    ]
+        "Chess",
+        "Russian Roulette",
+        "Spin the Bottle",
+        "Texas Hold'em Poker",
+        "Tic-Tac-Toe"]
+    
     var selectedGame:String? {
         didSet {
             if let game = selectedGame {
@@ -22,7 +26,38 @@ class GamePickerViewController: UITableViewController {
             }
         }
     }
+    
+    
     var selectedGameIndex:Int?
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SaveSelectedGame" {
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(cell)
+                if let index = indexPath?.row {
+                    selectedGame = games[index]
+                }
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -59,17 +94,6 @@ class GamePickerViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SaveSelectedGame" {
-            if let cell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(cell)
-                if let index = indexPath?.row {
-                    selectedGame = games[index]
-                }
-            }
-        }
     }
     
 

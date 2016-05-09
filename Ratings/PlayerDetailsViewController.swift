@@ -36,11 +36,11 @@ class PlayerDetailsViewController:UITableViewController {
         if segue.identifier == "SavePlayerDetail" {
             player = Player(name: nameTextField.text, game:game, rating: 1)
         }
-        if segue.identifier == "PickGame" {
+        /*if segue.identifier == "PickGame" {
             if let gamePickerViewController = segue.destinationViewController as? GamePickerViewController {
-                gamePickerViewController.selectedGame? = game
+                gamePickerViewController.selectedGame = game
             }
-        }
+        }*/
     }
     required init?(coder aDecoder: NSCoder) {
         print("init PlayerDetailsViewController")
